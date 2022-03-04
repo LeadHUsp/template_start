@@ -1,0 +1,26 @@
+include components/pug/mixin.pug
+include components/pug/ui.pug
+-var img = 'img'
+
+doctype
+html
+	head
+		block head
+			include components/pug/meta.pug
+			include components/pug/links.pug
+
+			block head-inner
+	body.theme_dark
+		include blocks/header/header.pug
+		
+		block header
+			
+
+		main.main
+			
+		block footer
+			include blocks/footer/footer.pug
+
+		block body-bottom
+
+			include components/pug/scripts.pug

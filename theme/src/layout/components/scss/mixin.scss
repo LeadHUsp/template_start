@@ -1,0 +1,132 @@
+/*
+	! Можно писать "null"если не надо выводить свойство
+*/
+
+/*
+	? Очистить дочерние элементы от float 
+	* @include clearfix;
+*/
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+/*
+	? Изменить скрол в блоке для браузера на Webkit
+	* @include scroll(10px, null, black, gray, null, null);
+*/
+@mixin scroll(
+  $scroll-width,
+  $scroll-height,
+  $scroll-color,
+  $scroll-background-color,
+  $scroll-hover,
+  $scroll-radius
+) {
+  &::-webkit-scrollbar {
+    width: $scroll-width;
+    height: $scroll-height;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-color;
+    border-radius: $scroll-radius;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $scroll-background-color;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $scroll-hover;
+  }
+}
+
+/*
+	? Адаптивный размер шрифта
+	* @include fz(18, 8);
+*/
+$templateSize: 1920 - 17; // 17 its width of scrollbar
+@mixin fz($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @include max-screen(767px) {
+    font-size: calc(
+      #{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$templateSize})
+    );
+  }
+
+  @include min-screen(767px) {
+    font-size: calc(
+      #{$mobSize + px} + #{$addSize} * (100vw / #{$templateSize})
+    );
+  }
+}
+
+/*
+	? Адаптивный расчет в зависимости от размера экрана
+	* @include value('padding-top','18', 8);
+*/
+@mixin value($property, $value, $min-value) {
+  #{$property}: $value + px;
+
+  @media (max-width: 1920px) {
+    #{$property}: calc(
+      #{$min-value + px} + #{($value - $min-value)} * ((100vw - 320px) / #{1920 -
+            320})
+    );
+  }
+}
+
+/*
+	? Треугольник на css
+	* @include triangle(up, 6px, black);
+*/
+@mixin triangle($triangle-direction, $triangle-size, $triangle-color) {
+  content: "";
+  width: 0;
+  height: 0;
+  display: block;
+
+  @if ($triangle-direction== "up") {
+    border-bottom: $triangle-size solid $triangle-color;
+    border-left: 1/2 * $triangle-size solid transparent;
+    border-right: 1/2 * $triangle-size solid transparent;
+  }
+
+  @if ($triangle-direction== "down") {
+    border-top: $triangle-size solid $triangle-color;
+    border-left: 1/2 * $triangle-size solid transparent;
+    border-right: 1/2 * $triangle-size solid transparent;
+  }
+
+  @if ($triangle-direction== "left") {
+    border-top: 1/2 * $triangle-size solid transparent;
+    border-bottom: 1/2 * $triangle-size solid transparent;
+    border-right: $triangle-size solid $triangle-color;
+  }
+
+  @if ($triangle-direction== "right") {
+    border-top: 1/2 * $triangle-size solid transparent;
+    border-bottom: 1/2 * $triangle-size solid transparent;
+    border-left: $triangle-size solid $triangle-color;
+  }
+}
+@function width($parent-width, $element-width) {
+  @return ($element-width / $parent-width) * 100%;
+}
+@mixin value($property, $min-value, $value) {
+  #{$property}: $value + px;
+  @media screen and (max-width: 1600px) {
+    #{$property}: calc(
+      #{$min-value + px} + #{($value - $min-value)} * ((100vw - 320px) / #{1600 -
+            320})
+    );
+  }
+}

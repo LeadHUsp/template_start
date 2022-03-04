@@ -1,0 +1,135 @@
+html,
+body {
+  position: relative;
+  font-family: $main-font;
+  font-weight: 400;
+  line-height: 170%;
+  @include value("font-size", 14, 16);
+}
+.swiper-slide {
+  transition-property: opacity, transform;
+}
+.main {
+  overflow: hidden;
+}
+
+.container {
+  max-width: $container-pc;
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+._fw {
+  width: 100%;
+  height: auto;
+}
+._h1-title {
+  font-weight: 800;
+  @include value("font-size", 22, 42);
+  text-transform: uppercase;
+  line-height: 136%;
+}
+._h2-title {
+  font-weight: 800;
+  @include value("font-size", 21, 36);
+  padding-bottom: 0.9em;
+  line-height: 136%;
+  text-transform: uppercase;
+}
+.btn {
+}
+._editor {
+  line-height: 170%;
+  p {
+    margin-bottom: 1.1em;
+    line-height: 170%;
+  }
+  ul {
+    padding-left: 18px;
+    margin-bottom: 1.1em;
+    li {
+      list-style-type: disc;
+    }
+  }
+  ol {
+    padding-left: 18px;
+    li {
+      list-style: decimal;
+    }
+  }
+  h2 {
+    @include value("font-size", 22, 36);
+  }
+  h3 {
+    @include value("font-size", 20, 30);
+  }
+  h4 {
+    @include value("font-size", 17, 24);
+  }
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 0.8em;
+    line-height: 125%;
+  }
+  img {
+    display: block;
+    margin-bottom: 0.6em;
+  }
+}
+
+.checkbox {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &__input {
+    position: absolute;
+    left: 100%;
+    opacity: 0;
+  }
+  &__input:checked + &__mark:after {
+    opacity: 1;
+  }
+  &__mark {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_theme_dark {
+      border: 1px solid #222222;
+      &:after {
+        background-color: #222222;
+      }
+    }
+    &_theme_light {
+      border: 1px solid #fff;
+      &:after {
+        background-color: #fff;
+      }
+    }
+    &:after {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: block;
+      opacity: 0;
+    }
+  }
+  &__text {
+    padding-left: 10px;
+    display: inline-block;
+    a:hover {
+      color: $danger;
+    }
+  }
+}
+.simplebar-scrollbar::before {
+  content: "";
+  background-color: #fff;
+}
